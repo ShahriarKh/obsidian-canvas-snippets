@@ -43,7 +43,7 @@ Your markdown here
 > [!NOTE]
 >  Middle `m` and center `c` positions don't work correctly with custom shapes, because of `overflow`.
 
-## Snippet
+## 📃 Snippet
 Add this css snippet. Feel free to change padding, margin and others based on your theme styles.
 ```css
 .canvas-node:not(.is-editing) {
@@ -229,3 +229,38 @@ For centered-content style:
   }
 }
 ```
+
+## 💎 Creating Shapes
+In oreder to create your custom shape, you can use this template:
+```css
+.canvas-node:has(.shape-your-shape-name) {
+  border: solid 2px hsl(var(--canvas-color)) !important;
+  background: hsl(var(--canvas-color)) !important;
+
+  clip-path: /* shape path */
+
+  .canvas-node-container {
+    clip-path: inherit;
+    border: none !important;
+  }
+
+  .markdown-embed-content {
+    padding: /* padding 1 */
+  }
+
+  .markdown-rendered {
+    padding: /* padding 2 */
+  }
+}
+```
+Replace `clip-path` value with your desired shape path, and change the paddings to make the inner content look readable.
+[Clippy](https://bennettfeely.com/clippy/) is a great tool for working with css paths.
+
+Here's a simple example, using Obsidian logo as a custom shape!
+
+<div style="display:flex;flex-direction:row;justify-content:center;gap:12px">
+  <img src="https://github.com/ShahriarKh/obsidian-canvas-snippets/assets/31452340/ba185f84-6584-4e12-8269-7edb496b764a" height="300px"/>
+  <img src="https://github.com/ShahriarKh/obsidian-canvas-snippets/assets/31452340/7965889f-f3ed-4464-9628-e6507b8996e8" height="300px" />
+</div>
+
+
