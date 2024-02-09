@@ -4,32 +4,73 @@ Here is a list of useful snippets to improve Obsidian Canvas.
 I will add more as I create them.  
 Don't forget to share & star 🙂
 
+(The snippets are created for [Prism Theme](https://github.com/damiankorcz/Prism-Theme) and you probably need to tweak them)
+
+Contents:
+- [Node Icons](#node-icons)
+- [Node Shapes](#node-shapes)
+
 # Node Icons
 ![image](https://github.com/ShahriarKh/obsidian-canvas-snippets/assets/31452340/e7bf311f-94fe-4725-829d-239b6ee1cd74)
+
+## ✍🏽 Usage
+First add the snippets, then place one or more spans in your node, including the `ni` class (short for "node icon"), icon position, and the icon itself.
+
+- Positions:
+  - Horizontal: `l` (left), `c` (center), `r` (right)
+  - Vertical: `t` (top), `m` (middle), `b` (bottom)
+- Icon Types:
+  - Emoji: `<span data-icon="🎈"></span>`
+  - Text: `<span>Custom Text</span>`
+  - Custom Icon (using [Iconize Plugin](https://github.com/FlorianWoelki/obsidian-iconize)): `<span>:LiFolderTree:</span>`
+
+Here are three examples:
+```md
+Your markdown here
+
+/* emoji as icon, top left */
+<span data-icon="☢" class="ni t l" />
+
+/* text as icon, bottom left */
+<span class="ni b l">Custom Text</span>
+
+/* text as icon, middle right */
+<span class="ni m r">:LiFolderTree:</span>
+
+Your markdown here
+```
+
+> [!NOTE]
+>  Middle `m` and center `c` positions don't work correctly with custom shapes, because of `overflow`.
 
 ## Snippet
 Add this css snippet. Feel free to change padding, margin and others based on your theme styles.
 ```css
 .canvas-node:not(.is-editing) {
+  transform: rotate(0deg);
+
   .ni {
-    padding: 4px; /* feel free to change based on your theme styles */
+    padding: 4px;
     position: absolute;
+    color: hsl(var(--canvas-color));
+    height: max-content;
 
     &[data-icon] {
+      padding: 0;
+      font-family: "Segoe UI Emoji";
+      font-size: 1rem;
+
       &:before {
-        display: block;
         content: attr(data-icon);
       }
-
-      /* feel free to change based on your theme styles */
-        font-family: "Segoe UI Emoji"; /* change this to an emoji font that matches your system */
-        font-size: 1rem;
-        padding: 0; 
     }
 
-    /* feel free to change based on your theme styles */
     &.t {
       top: 0;
+    }
+
+    &.m {
+      top: calc(50% - 12px);
     }
 
     &.b {
@@ -40,37 +81,32 @@ Add this css snippet. Feel free to change padding, margin and others based on yo
       right: -12px;
     }
 
+    &.c {
+      left: calc(50% - 4px);
+    }
+
     &.l {
       left: 0;
     }
   }
 }
-
 ```
 
-## Usage
-Add one or more spans to your node. `ni` (short for "node icon") is required.
-Use `t` (top), `l` (left), `r` (right), `b` (bottom) classes for positioning.
-
-Use `data-icon="⭐"` if you want to use an emoji.  
-You can use [Obsidian Iconize Plugin](https://github.com/FlorianWoelki/obsidian-iconize) to leverage custom icon packs.
-
-```md
-<span data-icon="☢" class="ni t l" />
-
-<span class="ni t l">Custom Text</p>
-
-<span class="ni t r">:LiFolderTree:</p>
-
-Your markdown here
-```
 
 ---
 
 # Node Shapes
 
-## Snippets
-(The snippets are created for [Prism Theme](https://github.com/damiankorcz/Prism-Theme) and you probably need to tweak them, but the general idea is to use `clip-path` for the shape, and add some padding to the inner content.
+## ✍🏽 Usage
+After adding the snippets, you can add any element (like a `<span>`) including the class name of the shape. For example, to create a circular node with centered content, put this in your node:
+
+```md
+Your node content...
+
+<span class="shape-circle node-center"></span>
+```
+
+## 📃 Snippets
 
 ### General
 
